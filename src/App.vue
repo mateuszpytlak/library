@@ -2,13 +2,13 @@
 	<div id="app">
 		<input v-model="inputTitle" type="text">
 		<button @click.prevent.enter="fetchData">Search</button>
-		<ul>
-			<li v-for="title in titlesArray">{{ title.volumeInfo.title }}</li>
-		</ul>
+		<app-book-list v-for="title in titlesArray" :title="title"></app-book-list>
 	</div>
 </template>
 
 <script>
+
+	import BookList from './components/BookList.vue';
 
 	export default {
 		name: 'app',
@@ -18,6 +18,9 @@
 				data: '',
 				titlesArray: [],
 			}
+		},
+		components: {
+			appBookList: BookList,
 		},
 		methods: {
 			search() {
@@ -32,7 +35,7 @@
 						return response.json();
 					})
 					.then(data => {
-						// console.log(data.items);
+						console.log(data.items);
 						this.titlesArray = data.items;
 					}
 					);
