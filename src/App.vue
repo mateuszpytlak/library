@@ -1,7 +1,10 @@
 <template>
 	<div id="app">
-		<input v-model="title" type="text">
-		<button @click.prevent="search">Search</button>
+		<input v-model="inputTitle" type="text">
+		<button @click.prevent.enter="fetchData">Search</button>
+		<ul>
+			<li v-for="title in titlesArray">{{ title.volumeInfo.title }}</li>
+		</ul>
 	</div>
 </template>
 
@@ -11,12 +14,29 @@
 		name: 'app',
 		data () {
 			return {
-				title: '',
+				inputTitle: '',
+				data: '',
+				titlesArray: [],
 			}
 		},
-		methods: function search() {
-			console.log('search');
-			console.log(this.title);
+		methods: {
+			search() {
+				// console.log('search: ' + this.inputTitle);
+				this.inputTitle = '';
+			},
+			fetchData() {
+				const url = `https://www.googleapis.com/books/v1/volumes?q=${this.inputTitle}`;
+				console.log(url);
+				this.$http.get(`https://www.googleapis.com/books/v1/volumes?q=${this.inputTitle}`)
+					.then(response => {
+						return response.json();
+					})
+					.then(data => {
+						// console.log(data.items);
+						this.titlesArray = data.items;
+					}
+					);
+			}
 		}
 }
 
@@ -42,7 +62,7 @@ ul {
 }
 
 li {
-	display: inline-block;
+	display: block;
 	margin: 0 10px;
 }
 
