@@ -77,9 +77,6 @@
 .description {
 	margin-left: 100px;
 	text-align: left;
-	p {
-		// text-align: left;
-	}
 }
 
 </style>
