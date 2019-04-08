@@ -1,8 +1,11 @@
 <template>
 	<div id="app">
-		<input v-model="inputTitle" type="text">
-		<button @click.prevent.enter="fetchData">Search</button>
-		<app-book-list v-for="title in titlesArray" :title="title"></app-book-list>
+		<input @keydown.enter="fetchData" v-model="inputTitle" type="text">
+		<button @click="fetchData">Search</button>
+		<app-book-list 
+			v-for="(title, index) in titlesArray" 
+			:title="title" 
+			:key = "index"></app-book-list>
 	</div>
 </template>
 
@@ -37,6 +40,7 @@
 					.then(data => {
 						console.log(data.items);
 						this.titlesArray = data.items;
+						this.inputTitle = '';
 					}
 					);
 			}

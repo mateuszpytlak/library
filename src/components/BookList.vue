@@ -8,11 +8,6 @@
 			<p>{{ title.volumeInfo.description }}</p>
 		</div>
 	</div>
-
-		<!-- <ul>
-			<li v-for="title in titlesArray">{{ title.volumeInfo.title }}</li>
-		</ul> -->
-
 </template>
 
 <script>
@@ -24,6 +19,18 @@
 				src: this.title.volumeInfo.imageLinks.thumbnail,
 			}
 		},
+		updated: function() {
+			if(typeof this.title.volumeInfo.imageLinks !== 'undefined') {	
+				// console.log('git');
+				// console.log(this.src);
+				this.src = this.title.volumeInfo.imageLinks.thumbnail;
+			} else if (typeof this.title.volumeInfo.imageLinks === 'undefined') {
+				// console.log('updated');
+				// console.log('niegit');
+				this.src ='';
+			}
+		
+		}
 	}
 
 </script>
@@ -33,11 +40,12 @@
 .bookList {
 	border: 1px solid red;
 	display: flex;
-	height: 200px;
+	min-height: 200px;
 }
 
 .image {
 	width: 150px;
+	// background: url(src);
 }
 
 .description {
