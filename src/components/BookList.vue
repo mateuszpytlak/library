@@ -3,9 +3,10 @@
 		<div class="image">
 			<img :src="src" alt="">
 		</div>
-		<div class="description">
+		<div class="description" @click="showMore">
 			<h2>{{ title.volumeInfo.title }}</h2>
-			<p>{{ title.volumeInfo.description }}</p>
+			<p>{{ shortDesctipt }}</p>
+			<button v-if="isShowMoreVisible" @click="showMore">Show more</button>
 		</div>
 	</div>
 </template>
@@ -17,21 +18,42 @@
 		data() {
 			return {
 				src: this.title.volumeInfo.imageLinks.thumbnail,
+				shortDesctipt: '',
+				isShowMoreVisible: false,
+			}
+		},
+		created: function() {
+			const description = this.title.volumeInfo.description;
+			if(typeof description !== 'undefined') {
+				if(description.length > 199) {
+					this.shortDesctipt = description.slice(0, 200);
+					this.isShowMoreVisible = true;
+				}
+			} else {
+				this.shortDesctipt = '';
 			}
 		},
 		updated: function() {
-			if(typeof this.title.volumeInfo.imageLinks !== 'undefined') {	
+			const imgLinks = this.title.volumeInfo.imageLinks;
+			if(typeof imgLinks !== 'undefined') {	
 				// console.log('git');
 				// console.log(this.src);
-				this.src = this.title.volumeInfo.imageLinks.thumbnail;
-			} else if (typeof this.title.volumeInfo.imageLinks === 'undefined') {
+				this.src = imgLinks.thumbnail;
+			} else if (typeof imgLinks === 'undefined') {
 				// console.log('updated');
 				// console.log('niegit');
 				this.src ='';
 			}
-		
+		},
+		methods: {
+			showMore() {
+				const description = this.title.volumeInfo.description;
+				this.shortDesctipt = description;
+				this.isShowMoreVisible = false;
+			}
 		}
 	}
+
 
 </script>
 
@@ -44,12 +66,16 @@
 }
 
 .image {
-	width: 150px;
+	// width: 150px;
+	min-width: 130px;
+	max-width: 130px;
+	border: 1px solid lightgray;
+	// background-color: lightgray;
 	// background: url(src);
 }
 
 .description {
-	margin-left: 150px;
+	margin-left: 100px;
 	text-align: left;
 	p {
 		// text-align: left;
