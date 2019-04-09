@@ -1,6 +1,6 @@
 <template>
 	<div class="container" id="app">
-		<input @keydown.enter="fetchData(10); resetCount();" v-model="inputTitle" type="text" placeholder="What are you looking for?">
+		<input @keydown.enter="fetchData(10); resetCount();" v-model="inputTitle" type="text" placeholder="What are you looking for?" autofocus>
 		<button @click="fetchData(10); resetCount()">Search</button>
 		<app-book-list 
 			v-for="(title, index) in titlesArray" 

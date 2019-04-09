@@ -12,11 +12,6 @@
 
 <script>
 
-// const description = this.title.volumeInfo.description;
-// const imgLinks = this.title.volumeInfo.imageLinks;
-
-
-
 	export default {
 		props: ['title'],
 		data() {
@@ -27,56 +22,57 @@
 			}
 		},
 		created: function() {
-			const description = this.title.volumeInfo.description;
-			// console.log('created');
-			if(typeof description !== 'undefined') {
-				// console.log('defined');
-				if(description.length > 199) {
-					this.shortDesctipt = description.slice(0, 200);
-					this.isShowMoreVisible = true;
-					console.log('show button show');
-				}
-			} else {
-				// console.log('undefined');
-				this.shortDesctipt = '';
-			}
+			this.shortenDescription();
 		},
 		updated: function() {
-			const imgLinks = this.title.volumeInfo.imageLinks;
-			if(typeof imgLinks !== 'undefined') {	
-				// console.log('git');
-				// console.log(this.src);
-				this.src = imgLinks.thumbnail;
-			} else if (typeof imgLinks === 'undefined') {
-				// console.log('updated');
-				// console.log('niegit');
-				this.src ='';
-			}
 			
-			const description = this.title.volumeInfo.description;
-			// console.log('created');
-			if(typeof description !== 'undefined') {
-				// console.log('defined');
-				if(description.length > 199 && this.isShowMoreVisible) {
-					this.shortDesctipt = description.slice(0, 200);
-					this.isShowMoreVisible = true;
-				}
-			} else {
-				// console.log('undefined');
-				this.shortDesctipt = '';
-			}
+			// this.shortenDescription();
+			
+			// const description = this.title.volumeInfo.description;
+			// // console.log('created');
+			// if(typeof description !== 'undefined') {
+			// 	// console.log('defined');
+			// 	if(description.length > 199 && this.isShowMoreVisible) {
+			// 		this.shortDesctipt = description.slice(0, 200);
+			// 		this.isShowMoreVisible = true;
+			// 		// console.log('show button show');
+			// 	}
+			// } else {
+			// 	// console.log('undefined');
+			// 	this.isShowMoreVisible = false;
+			// 	this.shortDesctipt = '';
+			// }
 
+			const imgLinks = this.title.volumeInfo.imageLinks;
+			typeof imgLinks !== 'undefined' ? this.src = imgLinks.thumbnail: this.src ='';
+			
 		},
 		methods: {
 			showMore() {
-				// console.log('show me more!');
-				// console.log(this.shortDesctipt);
+				console.log('show me more!');
+				console.log(this.shortDesctipt);
 				const description = this.title.volumeInfo.description;
 				this.shortDesctipt = description;
-				// console.log(this.shortDesctipt);
+				console.log(this.shortDesctipt);
 				this.isShowMoreVisible = false;
+			},
+			shortenDescription() {
+				const description = this.title.volumeInfo.description;
+				// console.log('created');
+				if(typeof description !== 'undefined') {
+					// console.log('defined');
+					if(description.length > 199) {
+						this.shortDesctipt = description.slice(0, 200);
+						this.isShowMoreVisible = true;
+						// console.log('show button show');
+					}
+				} else {
+					// console.log('undefined');
+					this.isShowMoreVisible = false;
+					this.shortDesctipt = '';
+				}
 			}
-		}
+		},
 	}
 
 
