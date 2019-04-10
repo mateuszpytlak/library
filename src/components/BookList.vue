@@ -3,6 +3,7 @@
 		<div class="image">
 			<img :src="src" alt="">
 		</div>
+		<hr>
 		<div class="description" @click="showMore">
 			<h2>{{ title.volumeInfo.title }}</h2>
 			<div v-if="costam">{{ descriptionToShow }}<p class="showMore" v-if="isShowMoreVisible" @click="showMore">Show more</p></div>
@@ -88,27 +89,31 @@
 
 .bookList {
 	// border: 1px solid red;
-	background-color: lightblue;
-	height: 250px;
-	border-radius: 10px;
-	display: flex;
-	min-height: 200px;
-	margin-bottom: 20px;
+		background-color: lightblue;
+		height: 250px;
+		border-radius: 10px;
+		display: flex;
+		min-height: 200px;
+		margin-bottom: 20px;
 	// border-bottom: 2px solid lightgray;
-}
-
-.image {
-	min-width: 130px;
-	max-width: 130px;
-	border: 1px solid lightgray;
-	margin-left: 20px;
-	margin-top: 20px;
-}
-
-.description {
-	margin-left: 100px;
-	text-align: left;
-	border: 1px solid blue;
+	.image {
+		min-width: 130px;
+		max-width: 130px;
+		border: 1px solid lightgray;
+		margin-left: 20px;
+		margin-top: 20px;
+	}
+	hr {
+		// color: red;
+		margin-left: 50px;
+		margin-top: 15px;
+		height: 220px;
+		display: none;
+	}
+	.description {
+		margin-left: 100px;
+		text-align: left;
+		border: 1px solid blue;
 	h2 {
 		margin: 10px 0;
 		text-decoration: underline;
@@ -117,11 +122,16 @@
 		margin-right: 30px;
 	}
 	.showMore {
-	color: gray;
-	text-decoration: underline;
-	cursor: pointer;
-	margin-top: 30px;
+		color: gray;
+		text-decoration: underline;
+		cursor: pointer;
+		margin-top: 30px;
+	}
 }
 }
+
+
+
+
 
 </style>
