@@ -1,11 +1,13 @@
 <template>
-	<div class="container" id="app">
-		<input @keydown.enter="fetchData(10); resetCount();" v-model="inputTitle" type="text" placeholder="What are you looking for?" autofocus>
-		<button @click="fetchData(10); resetCount()">Search</button>
-		<app-book-list 
-			v-for="(title, index) in titlesArray" 
-			:title="title" 
-			:key = "index"></app-book-list>
+	<div class="wrapper">
+		<div class="container" id="app">
+			<input @keydown.enter="fetchData(10); resetCount();" v-model="inputTitle" type="text" placeholder="What are you looking for?" autofocus>
+			<button @click="fetchData(10); resetCount()">Search</button>
+			<app-book-list 
+				v-for="(title, index) in titlesArray" 
+				:title="title" 
+				:key = "index"></app-book-list>
+		</div>
 	</div>
 </template>
 
@@ -90,29 +92,12 @@
 	box-sizing: border-box;
 }
 
-.container {
-	width: 70%;
-	border: 2px dashed green;
-	padding-left: 30px;
-	padding-right: 30px;
-	margin-left: auto;
-	margin-right: auto;
-	input {
-		margin: 20px 0;
-	}
-}
-
-#app {
-	font-family: 'Avenir', Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
-	margin-top: 60px;
+body {
+	font-family: 'Montserrat', sans-serif;
 }
 
 h1, h2 {
-	font-weight: normal;
+	font-weight: bold;
 }
 
 ul {
@@ -127,6 +112,64 @@ li {
 
 a {
 	color: #42b983;
+}
+
+#app {
+	text-align: center;
+	color: #2c3e50;
+	// margin-top: 60px;
+}
+
+.wrapper {
+	// border: 1px solid orange;
+	min-height: 100vh;
+	width: 80vw;
+	margin: 0 auto;
+	padding-top: 10px;
+	background-color: #E4E6FD;
+	.container {
+		width: 70%;
+		// border: 2px dashed green;
+		padding-left: 30px;
+		padding-right: 30px;
+		margin-left: auto;
+		margin-right: auto;
+		// background-color: #E4E6FD;
+		input {
+			margin: 20px 0;
+			width: 250px;
+			height: 30px;
+			background-color: #868EE0;
+			border: 1px solid #868EE0;
+			padding: 5px;
+			border-radius: 3px;
+			color: #0E3C31;
+			font-weight: bold;
+			&::placeholder {
+				color: #0E3C31;
+				font-weight: bold;
+			}
+			&:focus {
+				box-shadow: -3px 4px 5px 0px rgba(0,0,0,0.75);
+			}
+		}
+		button {
+			height: 30px;
+			width: 80px;
+			font-weight: bold;
+			cursor: pointer;
+			margin-left: 30px;
+			background-color: #868EE0;
+			border: 1px solid #868EE0;
+			border-radius: 3px;
+			color: #0E3C31;
+			transition: all 0.5s;
+			&:hover {
+				background-color: #6B9DC0;
+				color: #050505;
+			}
+		}
+	}
 }
 
 </style>
